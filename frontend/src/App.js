@@ -5,7 +5,7 @@ import { Style } from './style';
 import Login from './screens/Login';
 import Orders from './screens/Orders';
 import Order from './screens/Order';
-import MenuBar from './MenuBar';
+import MenuBar from './components/MenuBar';
 import './firebase';
 
 function App() {

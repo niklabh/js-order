@@ -4,7 +4,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
 
-import logo from './assets/logo.png';
+import logo from '../assets/logo.png';
 
 const MenuBar = ({ className }) => {
 
