@@ -5,7 +5,6 @@ import { Style } from './style';
 import Login from './screens/login';
 import Orders from './screens/orders';
 import Order from './screens/order';
-import './App.css';
 import './firebase';
 
 function App() {

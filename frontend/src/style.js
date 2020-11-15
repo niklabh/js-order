@@ -10,7 +10,7 @@ export const Style = createGlobalStyle`
 
     body {
         margin: 0;
-        font-family: font_default, 'Roboto', 'Segoe UI', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        font-family: 'Roboto', 'Segoe UI', 'Helvetica Neue', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         background-color: grey_app_background;
@@ -22,16 +22,6 @@ export const Style = createGlobalStyle`
         max-width: 100%;
         white-space: pre-wrap;
         background-color: grey_light;
-    }
-
-    code {
-        display: inline-block;
-        max-width: 100%;
-        font-family: font_mono, source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
-        background-color: grey_light;
-        color: black_primary;
-        font-size: sm;
     }
 
     ul {
@@ -81,15 +71,15 @@ export const Style = createGlobalStyle`
     }
 
     h1, h2, h3, h4, h5, h6 {
-        color: black_primary;
-        font-family: font_default;
+        color: #2E2F30;
+        font-family: Roboto;
         line-height: 100%;
         margin-top: 0;
     }
 
     h1, h2, h3 {
         font-weight: 400;
-        font-size: xxl;
+        font-size: 3rem;
     }
 
     h3 {
@@ -109,12 +99,12 @@ export const Style = createGlobalStyle`
     }
 
     h3, h4 {
-        font-size: lg;
+        font-size: 1.8rem;
         margin-bottom: 1.2rem;
     }
 
     h5, h6 {
-        font-size: md;
+        font-size: 1.5rem;
         margin-bottom: 0.4rem;
     }
 
@@ -123,12 +113,12 @@ export const Style = createGlobalStyle`
     }
 
     ::selection {
-        background-color: black_primary;
+        background-color: #2E2F30;
         color: white;
     }
 
     .ui.dropdown .menu, .ui.dropdown .menu>.item {
-        font-size: sm;
+        font-size: 1.3rem;
     }
 
     @media only screen and (max-width: 768px) {
@@ -145,7 +135,7 @@ export const Style = createGlobalStyle`
 
     @media only screen and (max-width: 576px) {
         .container-fluid {
-        padding:0;
+        	padding:0;
         }
 
         .ui.grid, .ui.container {
