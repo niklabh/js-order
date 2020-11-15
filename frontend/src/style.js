@@ -13,15 +13,15 @@ export const Style = createGlobalStyle`
         font-family: 'Roboto', 'Segoe UI', 'Helvetica Neue', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background-color: grey_app_background;
-        color: black_text;
+        background-color: #F7F9FA;
+        color: #53595C;
     }
 
     pre {
         display: inline-block;
         max-width: 100%;
         white-space: pre-wrap;
-        background-color: grey_light;
+        background-color: #EBF0F5;
     }
 
     ul {
@@ -30,9 +30,9 @@ export const Style = createGlobalStyle`
 
     p {
         a {
-            color: pink_primary;
+            color: #E5007A;
             &:hover {
-                color: pink_secondary;
+                color: #C40061;
             }
         }
     }

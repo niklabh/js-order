@@ -2,9 +2,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
 import { Style } from './style';
-import Login from './screens/login';
-import Orders from './screens/orders';
-import Order from './screens/order';
+import Login from './screens/Login';
+import Orders from './screens/Orders';
+import Order from './screens/Order';
+import MenuBar from './MenuBar';
 import './firebase';
 
 function App() {
@@ -12,10 +13,13 @@ function App() {
     <>
       <Style />
       <Router>
-        {/* <MenuBar /> */}
+        <MenuBar />
         <Container>
           <Switch>
             <Route exact path="/">
+              <Login />
+            </Route>
+            <Route exact path="/login">
               <Login />
             </Route>
             <Route path="/orders">
