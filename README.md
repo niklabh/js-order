@@ -27,3 +27,4 @@ App will be running at http://localhost:3000/
 - Provide username and password
 - Click on Orders tab to see all orders
 - Click on Create tab to create new order
+- Click on edit button in order to update order
