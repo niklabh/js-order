@@ -1,7 +1,9 @@
 # js-order
 order details in react, node.js
 
-To Run copy serviceAccountKey.json in backend go to backend and start:
+Backend is created with express js. Frontend is created with react.js.
+
+To Run copy serviceAccountKey.json in backend then go to backend and start server:
 
 ```
 > cp serviceAccountKey.json /path/to/js-order/backend/
@@ -23,3 +25,5 @@ App will be running at http://localhost:3000/
 
 - Click Login
 - Provide username and password
+- Click on Orders tab to see all orders
+- Click on Create tab to create new order
