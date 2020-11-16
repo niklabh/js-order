@@ -72,11 +72,6 @@ const Order = ({ className }) => {
 
 	}, [id, loggedIn]);
 
-	if (!loggedIn) {
-        history.push('/login');
-        return <></>;
-	}
-
 	const handleEdit = () => {
 		history.push(`/edit-order/${id}`);
 	};

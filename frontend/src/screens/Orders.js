@@ -5,10 +5,8 @@ import firebase from 'firebase/app';
 
 import Card from '../components/Card';
 import { UserContext } from '../context/User';
-import { useRouter } from '../hooks/Router';
 
 const Discussions = ({ className }) => {
-	const { history } = useRouter();
 	const { loggedIn } = useContext(UserContext);
 	const [orders, setOrders] = useState([]);
 
@@ -42,11 +40,6 @@ const Discussions = ({ className }) => {
 
 	}, [loggedIn]);
 
-	if (!loggedIn) {
-        history.push('/login');
-        return <></>;
-	}
-
 	if (!orders || !orders.length) return <div>...</div>;
 
 	return (
@@ -55,7 +48,7 @@ const Discussions = ({ className }) => {
 				orders.map(
 					(order) => {
 						return <li key={order.id} className='item'>
-                            {<Link to={`/order/${order.id}`}>
+                            {<Link to={`/orders/${order.id}`}>
                                 <Card
                                     title={order.title}
                                     bookingDate={order.bookingDate}

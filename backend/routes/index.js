@@ -64,7 +64,7 @@ router.put('/orders/:id', async (req, res, next) => {
     await orderRef.update(payload);
 
     res.json({
-      id,
+      id: req.params.id,
       ...payload
     });
   } catch (error) {

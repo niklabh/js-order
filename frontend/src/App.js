@@ -10,6 +10,7 @@ import Order from './screens/Order';
 import CreateOrder from './screens/CreateOrder';
 import EditOrder from './screens/EditOrder';
 import MenuBar from './components/MenuBar';
+import ProtectedRoute from './components/ProtectedRoute';
 import './firebase';
 
 function App() {
@@ -27,17 +28,17 @@ function App() {
               <Route exact path="/login">
                 <Login />
               </Route>
-              <Route path="/orders">
-                <Orders />
+              <Route exact path="/orders/:id">
+                <ProtectedRoute component={Order} />
               </Route>
-              <Route path="/order/:id">
-                <Order />
+              <Route exact path="/orders">
+                <ProtectedRoute component={Orders} />
               </Route>
-              <Route path="/create-order">
-                <CreateOrder />
+              <Route exact path="/create-order">
+                <ProtectedRoute component={CreateOrder} />
               </Route>
-              <Route path="/edit-order/:id">
-                <EditOrder />
+              <Route exact path="/edit-order/:id">
+                <ProtectedRoute component={EditOrder} />
               </Route>
             </Switch>
           </Container>

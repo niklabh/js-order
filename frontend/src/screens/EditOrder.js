@@ -1,21 +1,24 @@
 import styled from 'styled-components';
 import { Button, Grid, Form } from 'semantic-ui-react';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import { Controller, useForm } from 'react-hook-form';
+import axios from 'axios';
 
 import Input from '../components/Input';
 import messages from '../messages';
 import { UserContext } from '../context/User';
 import { useRouter } from '../hooks/Router';
+import { BACKEND } from '../constants';
 
 const EditOrder = ({ className }) => {
 	const { history } = useRouter();
-	const { loggedIn } = useContext(UserContext);
+	const { uid, loggedIn } = useContext(UserContext);
 	const { id } = useParams();
 	const { control, errors, handleSubmit, setValue } = useForm();
+	const [error, setError] = useState('');
 
 	useEffect(() => {
 		if (!loggedIn) {
@@ -67,13 +70,37 @@ const EditOrder = ({ className }) => {
 
 	}, [id, loggedIn, setValue]);
 
-	if (!loggedIn) {
-        history.push('/login');
-        return <></>;
-	}
+	const handleEdit = (data) => {
+		const bookingDate = moment(data.bookingDate, "DD.MM.YYYY");
 
-	const handleEdit = (e) => {
-		// TODO: submit backend
+        if (!bookingDate.isValid()) {
+            setError('Invalid date use DD.MM.YYYY');
+            return;
+        }
+
+        const payload = {
+            address: {
+                city: data.city,
+                country: data.country,
+                street: data.street,
+                zip: data.zip
+            },
+            bookingDate: bookingDate.valueOf(),
+            customer: {
+                email: data.email,
+                name: data.name,
+                phone: data.phone
+            },
+            title: data.title,
+            uid
+        };
+
+        axios
+			.put(`${BACKEND}/orders/${id}`, payload, { headers: { 'Content-Type': 'application/json' } })
+			.then(() => {
+                history.push(`/orders/${id}`);
+            })
+            .catch((error) => setError(error.message));
 	};
 
 	const handleChange = (e) => {
@@ -241,7 +268,7 @@ const EditOrder = ({ className }) => {
                             {(errors.phone)?.type === 'required' && <span className={'errorText'}>{messages.VALIDATION_REQUIRED_ERROR}</span>}
                         </Form.Field>
                     </Form.Group>
-
+					{error && <span className={'errorText'}>{error}</span>}
                     <div className={'mainButtonContainer'}>
                         <Button
                             primary
@@ -263,5 +290,9 @@ export default styled(EditOrder)`
 
 	.desc {
 		font-weight: bold;
+	}
+
+	.errorText {
+		color: #D94C3D;
 	}
 `;

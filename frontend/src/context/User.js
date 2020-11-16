@@ -34,6 +34,7 @@ export const UserProvider = ({ children }) => {
 							loggedIn: true,
 							setUserContextState
 						});
+						window.localStorage.setItem('loggedIn', 'true');
 					} else {
 						console.error("User data not found!");
 					}
@@ -43,6 +44,7 @@ export const UserProvider = ({ children }) => {
 
             } else {
 				setUserContextState(initialUserContext);
+				window.localStorage.setItem('loggedIn', 'false');
             }
         });
 
