@@ -76,7 +76,6 @@ const Login = ({ className }) => {
 			</Grid.Column>
 			<Grid.Column only='tablet computer' tablet={2} computer={4} largeScreen={5} widescreen={5}/>
 		</Grid>
-
 	);
 };
 

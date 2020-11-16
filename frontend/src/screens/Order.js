@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Grid, Table } from 'semantic-ui-react';
+import { Button, Grid, Table } from 'semantic-ui-react';
 import React, { useContext, useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 import { useParams } from 'react-router-dom';
@@ -75,7 +75,11 @@ const Order = ({ className }) => {
 	if (!loggedIn) {
         history.push('/login');
         return <></>;
-    }
+	}
+
+	const handleEdit = () => {
+		history.push(`/edit-order/${id}`);
+	};
 
 	return (
 		<Grid className={className}>
@@ -106,6 +110,17 @@ const Order = ({ className }) => {
 									<div>{name}</div>
 									<div>{email}</div>
 									<div>{phone}</div>
+								</Table.Cell>
+                            </Table.Row>
+							<Table.Row>
+								<Table.Cell></Table.Cell>
+                                <Table.Cell>
+									<Button
+										primary
+										onClick={handleEdit}
+									>
+										Edit
+									</Button>
 								</Table.Cell>
                             </Table.Row>
                         </Table.Body>

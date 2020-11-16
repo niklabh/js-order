@@ -48,12 +48,6 @@ export default function Card ({
 	address,
 	customer
 }) {
-	console.log(
-		title,
-		bookingDate,
-		address,
-		customer
-	);
 	const date = moment(new Date(bookingDate));
 
 	return (

@@ -7,6 +7,7 @@ import Home from './screens/Home';
 import Login from './screens/Login';
 import Orders from './screens/Orders';
 import Order from './screens/Order';
+import EditOrder from './screens/EditOrder';
 import MenuBar from './components/MenuBar';
 import './firebase';
 
@@ -30,6 +31,9 @@ function App() {
               </Route>
               <Route path="/order/:id">
                 <Order />
+              </Route>
+              <Route path="/edit-order/:id">
+                <EditOrder />
               </Route>
             </Switch>
           </Container>
