@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import firebase from 'firebase/app';
 
 import Card from '../components/Card';
 import { UserContext } from '../context/User';
@@ -9,38 +10,55 @@ import { useRouter } from '../hooks/Router';
 const Discussions = ({ className }) => {
 	const { history } = useRouter();
 	const { loggedIn } = useContext(UserContext);
+	const [orders, setOrders] = useState([]);
 
-    const orders = [{
-        id: 1,
-        title: 'title1',
-        date: 'date',
-        address: 'address',
-        customer: 'customer',
-    }, {
-        id: 1,
-        title: 'title2',
-        date: 'date',
-        address: 'address',
-        customer: 'customer',
-	}];
+	useEffect(() => {
+		if (!loggedIn) {
+			return;
+		}
+		const db = firebase.firestore();
+		db.collection("orders")
+			.get()
+			.then(function(querySnapshot) {
+				const orders = [];
+				querySnapshot.forEach(function(doc) {
+					const data = doc.data();
+					if (data.title) {
+						orders.push({
+							id: doc.id,
+							uid: data.uid,
+							title: data.title,
+							bookingDate: data.bookingDate,
+							address: data.address,
+							customer: data.customer
+						});
+					}
+				});
+				setOrders(orders);
+			})
+			.catch(function(error) {
+				console.log("Error getting documents: ", error);
+			});
+
+	}, [loggedIn]);
 
 	if (!loggedIn) {
         history.push('/login');
         return <></>;
-    }
+	}
 
-	if (!orders || !orders.length) return <div>No orders.</div>;
+	if (!orders || !orders.length) return <div>...</div>;
 
 	return (
 		<ul className={className}>
 			{!!orders &&
 				orders.map(
 					(order) => {
-						return <li key={order.title} className='item'>
+						return <li key={order.id} className='item'>
                             {<Link to={`/order/${order.id}`}>
                                 <Card
                                     title={order.title}
-                                    date={order.date}
+                                    bookingDate={order.bookingDate}
                                     address={order.address}
                                     customer={order.customer}
                                 />

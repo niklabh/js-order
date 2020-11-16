@@ -2,13 +2,14 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { Button, Grid, Form } from 'semantic-ui-react';
 import firebase from 'firebase/app';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { UserContext } from '../context/User';
 import { useRouter } from '../hooks/Router';
 import messages from '../messages';
 
 const Login = ({ className }) => {
+    const [error, setError] = useState('');
     const { errors, handleSubmit, register } = useForm();
     const { loggedIn } = useContext(UserContext);
     const { history } = useRouter();
@@ -19,9 +20,8 @@ const Login = ({ className }) => {
     }
 
 	const handleLogin = ({ email, password }) => {
-        console.log(email, password)
-        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-            console.log(error);
+        firebase.auth().signInWithEmailAndPassword(email, password).catch((error) => {
+            setError(error.message);
         });
 	};
 
@@ -60,6 +60,7 @@ const Login = ({ className }) => {
                                 type='password'
                             />
                             {errors.password && <span className={'errorText'}>{messages.VALIDATION_PASSWORD_ERROR}</span>}
+                            {error && <span className={'errorText'}>{error}</span>}
                         </Form.Field>
                     </Form.Group>
 

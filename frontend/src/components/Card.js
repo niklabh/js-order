@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Icon } from 'semantic-ui-react';
+import moment from 'moment';
 
 const StyledCard = styled.div`
 	padding: 2rem 3rem 1.5rem 3rem;
@@ -43,17 +44,25 @@ const StyledCard = styled.div`
 
 export default function Card ({
 	title,
-	date,
+	bookingDate,
 	address,
-	customer,
+	customer
 }) {
+	console.log(
+		title,
+		bookingDate,
+		address,
+		customer
+	);
+	const date = moment(new Date(bookingDate));
+
 	return (
 		<StyledCard>
 			<h4>{title}</h4>
 			<ul>
-				<li><Icon name='calendar' /> {date}</li>
-				<li><Icon name='location arrow' /> {address}</li>
-				<li><Icon name='user' /> {customer}</li>
+				{date.isValid() && <li><Icon name='calendar' /> {date.format('DD.MM.YYYY')}</li>}
+				{address && <li><Icon name='location arrow' /> {address.street}</li>}
+				{customer && <li><Icon name='user' /> {customer.name}</li>}
 			</ul>
 		</StyledCard>
 	);
