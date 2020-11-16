@@ -11,7 +11,7 @@ import messages from '../messages';
 import { UserContext } from '../context/User';
 import { useRouter } from '../hooks/Router';
 
-const Order = ({ className }) => {
+const EditOrder = ({ className }) => {
 	const { history } = useRouter();
 	const { loggedIn } = useContext(UserContext);
 	const { id } = useParams();
@@ -120,7 +120,7 @@ const Order = ({ className }) => {
                             {(errors.bookingDate)?.type === 'required' && <span className={'errorText'}>{messages.VALIDATION_REQUIRED_ERROR}</span>}
                         </Form.Field>
                     </Form.Group>
-					<h3>Address</h3>
+					<h5>Address</h5>
 					<Form.Group>
                         <Form.Field width={16}>
                             <label>Street</label>
@@ -189,7 +189,7 @@ const Order = ({ className }) => {
                             {(errors.zip)?.type === 'required' && <span className={'errorText'}>{messages.VALIDATION_REQUIRED_ERROR}</span>}
                         </Form.Field>
                     </Form.Group>
-					<h3>Customer</h3>
+					<h5>Customer</h5>
 					<Form.Group>
                         <Form.Field width={16}>
                             <label>Name</label>
@@ -257,33 +257,9 @@ const Order = ({ className }) => {
 	);
 };
 
-export default styled(Order)`
+export default styled(EditOrder)`
 	display: flex;
 	justify-content: center;
-
-	.info-box {
-		background-color: white;
-		border-radius: 3px;
-		box-shadow: box_shadow_card;
-		margin: 1rem;
-		width: calc(100% - 60px);
-		word-break: break-word;
-		padding: 10px;
-		text-align: center;
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-
-		@media only screen and (max-width: 576px) {
-			width: 100%;
-			border-radius: 0px;
-		}
-	}
-
-
-	.address-container {
-		margin: 10px 0;
-	}
 
 	.desc {
 		font-weight: bold;

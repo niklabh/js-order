@@ -25,6 +25,7 @@ const MenuBar = ({ className }) => {
 				{loggedIn
 					? <>
 						<Menu.Item as={NavLink} className='user_items' content='Orders' to='/orders' />
+						<Menu.Item as={NavLink} className='user_items' content='Create' to='/create-order' />
 						<Menu.Item as={NavLink} className='user_items' content='Logout' to='#' onClick={handleLogout} />
 					</>
 					: <Menu.Item as={NavLink} className='user_items' content='Login' to='/login' />

@@ -154,11 +154,6 @@ export default styled(Order)`
 		}
 	}
 
-
-	.address-container {
-		margin: 10px 0;
-	}
-
 	.desc {
 		font-weight: bold;
 	}
