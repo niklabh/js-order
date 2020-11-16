@@ -1,14 +1,23 @@
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { Button, Grid, Form } from 'semantic-ui-react';
+import firebase from 'firebase/app';
+import React, { useContext } from 'react';
 
+import { UserContext } from '../context/User';
 import messages from '../messages';
 
 const Login = ({ className }) => {
-	const { errors, handleSubmit, register } = useForm();
+    const { errors, handleSubmit, register } = useForm();
+    const user = useContext(UserContext);
 
-	const handleLogin = ({ username, password }) => {
-        console.log(username, password)
+    console.log(user);
+
+	const handleLogin = ({ email, password }) => {
+        console.log(email, password)
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+            console.log(error);
+        });
 	};
 
 	return (
@@ -19,17 +28,19 @@ const Login = ({ className }) => {
                     <h3>Login</h3>
                     <Form.Group>
                         <Form.Field width={16}>
-                            <label>Username</label>
+                            <label>Email</label>
                             <input
-                                className={errors.username ? 'error' : ''}
-                                name='username'
-                                placeholder='John'
-                                ref={register({ maxLength:30, minLength:3, required: true })}
+                                className={errors.email ? 'error' : ''}
+                                name='email'
+                                placeholder='john@doe.com'
+                                ref={register({
+                                    pattern: /^[A-Z0-9_'%=+!`#~$*?^{}&|-]+([.][A-Z0-9_'%=+!`#~$*?^{}&|-]+)*@[A-Z0-9-]+(\.[A-Z0-9-]+)+$/i,
+                                    required: true
+                                })}
                                 type='text'
                             />
-                            {(errors.username)?.type === 'maxLength' && <span className={'errorText'}>{messages.VALIDATION_USERNAME_MAXLENGTH_ERROR}</span>}
-                            {(errors.username)?.type === 'minLength' && <span className={'errorText'}>{messages.VALIDATION_USERNAME_MINLENGTH_ERROR}</span>}
-                            {(errors.username)?.type === 'required' && <span className={'errorText'}>{messages.VALIDATION_USERNAME_REQUIRED_ERROR}</span>}
+                            {(errors.email)?.type === 'pattern' && <span className={'errorText'}>{messages.VALIDATION_EMAIL_PATTERN_ERROR}</span>}
+                            {(errors.email)?.type === 'required' && <span className={'errorText'}>{messages.VALIDATION_EMAIL_REQUIRED_ERROR}</span>}
                         </Form.Field>
                     </Form.Group>
 
