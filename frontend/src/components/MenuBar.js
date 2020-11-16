@@ -1,22 +1,34 @@
 
 import styled from 'styled-components';
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
+import firebase from 'firebase/app';
+import React, { useContext } from 'react';
 
+import { UserContext } from '../context/User';
 import logo from '../assets/logo.png';
 
 const MenuBar = ({ className }) => {
+	const { loggedIn } = useContext(UserContext);
 
-	const handleLogout = async () => {
-
+	const handleLogout = (e) => {
+		e.preventDefault();
+		firebase.auth().signOut().catch(function(error) {
+			console.error("Error in sign out", error);
+		});
 	};
 
 	return (
 		<Menu className={className} stackable inverted borderless>
 			<Menu.Item as={NavLink} to="/" className='logo' id='title'><img alt='Polkassembly Logo' src={logo} /></Menu.Item>
 			<Menu.Menu position="right">
-				<Menu.Item as={NavLink} className='user_items' content='Login' to='/login' />
+				{loggedIn
+					? <>
+						<Menu.Item as={NavLink} className='user_items' content='Orders' to='/orders' />
+						<Menu.Item as={NavLink} className='user_items' content='Logout' to='#' onClick={handleLogout} />
+					</>
+					: <Menu.Item as={NavLink} className='user_items' content='Login' to='/login' />
+				}
 			</Menu.Menu>
 		</Menu>
 	);

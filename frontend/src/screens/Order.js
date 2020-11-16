@@ -1,7 +1,19 @@
 import styled from 'styled-components';
 import { Grid, Table } from 'semantic-ui-react';
+import React, { useContext } from 'react';
+
+import { UserContext } from '../context/User';
+import { useRouter } from '../hooks/Router';
 
 const Order = ({ className }) => {
+	const { history } = useRouter();
+	const { loggedIn } = useContext(UserContext);
+
+	if (!loggedIn) {
+        history.push('/login');
+        return <></>;
+    }
+
     const order = {
         id: 1,
         title: 'title1',

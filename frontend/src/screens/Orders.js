@@ -1,11 +1,15 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import Card from '../components/Card';
-
+import { UserContext } from '../context/User';
+import { useRouter } from '../hooks/Router';
 
 const Discussions = ({ className }) => {
+	const { history } = useRouter();
+	const { loggedIn } = useContext(UserContext);
+
     const orders = [{
         id: 1,
         title: 'title1',
@@ -18,7 +22,12 @@ const Discussions = ({ className }) => {
         date: 'date',
         address: 'address',
         customer: 'customer',
-    }];
+	}];
+
+	if (!loggedIn) {
+        history.push('/login');
+        return <></>;
+    }
 
 	if (!orders || !orders.length) return <div>No orders.</div>;
 

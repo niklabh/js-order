@@ -5,13 +5,18 @@ import firebase from 'firebase/app';
 import React, { useContext } from 'react';
 
 import { UserContext } from '../context/User';
+import { useRouter } from '../hooks/Router';
 import messages from '../messages';
 
 const Login = ({ className }) => {
     const { errors, handleSubmit, register } = useForm();
-    const user = useContext(UserContext);
+    const { loggedIn } = useContext(UserContext);
+    const { history } = useRouter();
 
-    console.log(user);
+    if (loggedIn) {
+        history.push('/');
+        return <></>;
+    }
 
 	const handleLogin = ({ email, password }) => {
         console.log(email, password)

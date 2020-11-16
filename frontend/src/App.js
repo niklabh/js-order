@@ -3,6 +3,7 @@ import { Container } from 'semantic-ui-react';
 
 import { Style } from './style';
 import { UserProvider } from './context/User';
+import Home from './screens/Home';
 import Login from './screens/Login';
 import Orders from './screens/Orders';
 import Order from './screens/Order';
@@ -19,7 +20,7 @@ function App() {
           <Container>
             <Switch>
               <Route exact path="/">
-                <Login />
+                <Home />
               </Route>
               <Route exact path="/login">
                 <Login />
